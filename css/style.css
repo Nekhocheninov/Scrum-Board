@@ -1,0 +1,115 @@
+body{
+    min-height:100%;
+    background: -webkit-linear-gradient(90deg, #4e287a,#47439a,#345db8);
+    background: linear-gradient(90deg, #4e287a,#47439a,#345db8);
+}
+h1{
+    text-transform: uppercase;
+    background: #083da1;
+    color:white;
+    margin: 0;
+    padding:10px 28px;
+    font-weight: normal;
+    border-radius: 25px 25px 0px 0px;
+}
+h2{
+    margin: 0;
+    padding:10px 28px;
+    font-weight: normal;
+    background: #f7f7f7;
+}
+input{
+    background: white;
+    width: 100%;
+    box-sizing: border-box;
+    height:50px ;
+    font-size: 20px;
+    font-weight: 0.5px;
+    padding-left:25px;
+    border: 3px solid gray;
+    color: gray;
+}
+input:focus{
+    background: #edf1f5;
+    border: 3px solid #083da1;
+    outline:none;
+    color: #083da1;
+}
+.trash{
+    width : 34px;
+    float: left;
+    margin: 8px 0px 0px 0px;
+    opacity: 0;
+    transition: 0.6s linear;
+}
+.img-right, .img-left{
+    width : 20px;
+    float: right;
+    margin: 15px 10px 0px 0px;
+    opacity: 0;
+    transition: 0.6s linear;
+}
+.img-right{
+    transform: rotate(90deg);
+}
+.img-left{
+    transform: rotate(-90deg);
+}
+.list li:hover img{
+    opacity: 0.6;
+}
+.scrumBoard{
+    margin: 100 200;
+    position:relative;
+    min-width: 1200;
+}
+.inputForm{
+    max-width: 400;
+    border-radius: 25px 25px 0px 0px;
+    box-shadow: 0 0 1em black;
+}
+.flex{
+    display: flex;
+    flex-direction: row;
+    background: white;
+    border-radius: 0px 25px 25px 25px;
+    min-height:67.4%;
+    box-shadow: 0 0 1em black;
+}
+.list{
+    list-style-type: none;
+    margin: 10;
+    padding: 0;
+}
+.list li{
+    height:50px;
+    width: 377px;
+    line-height: 50px;
+    cursor: pointer;
+    font-size: 20px;
+    border-radius: 15px;
+    margin-bottom: 10px;
+    box-shadow: 10px 10px 0.8em rgb(106, 100, 100);
+}
+#list1 li{
+    background:#edf1f5;
+}
+#list2 li{
+    background:#fff3d3;
+}
+#list3 li{
+    background:#dfffd7;
+}
+#backlog, #inProgress, #done{
+    min-width: 400;
+}
+#backlog, #inProgress{
+    border-right: 3px dashed #939393;
+	box-sizing: border-box;
+}
+#list1 .img-left{
+    display: none;
+}
+#list3 .img-right{
+    display: none;
+}
