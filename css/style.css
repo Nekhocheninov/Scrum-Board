@@ -93,6 +93,9 @@ input:focus{
     margin-bottom: 10px;
     box-shadow: 10px 10px 0.8em rgb(106, 100, 100);
 }
+.selected{
+    opacity: 0.6;
+}
 #list1 li{
     background:#edf1f5;
 }
