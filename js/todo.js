@@ -4,7 +4,11 @@ var imgs = document.getElementsByTagName("img");
 var lists = document.querySelectorAll(".list");
 
 // Add drag and drop functionality
-lists.forEach(function (list) {
+lists.forEach(function (list){
+  list.addEventListener(`dragend`, function (event) {
+    event.target.classList.remove(`selected`);
+  });
+
   list.addEventListener("dragover", function (event){
     event.preventDefault();
   });
@@ -22,6 +26,7 @@ var draggedItem = null;
 
 document.addEventListener("dragstart", function (event){
   if (event.target.classList.contains("list")) return;
+  event.target.classList.add(`selected`);
   draggedItem = event.target;
 });
 
