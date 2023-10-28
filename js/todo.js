@@ -11,12 +11,24 @@ lists.forEach(function (list){
 
   list.addEventListener("dragover", function (event){
     event.preventDefault();
+
+    const currentElement = event.target;
+
+    if (draggedItem !== currentElement && currentElement.tagName === 'LI'){
+      const nextElement = (currentElement === draggedItem.nextElementSibling) ?
+                           currentElement.nextElementSibling : currentElement;
+      list.insertBefore(draggedItem, nextElement);
+      return;
+    }
+    else if (currentElement.tagName === 'UL' && list.childElementCount === 0 || list.childElementCount === 1){
+      list.appendChild(draggedItem);
+      return;
+    }
   });
 
   list.addEventListener("drop", function (event){
     event.preventDefault();
-    if (draggedItem) {
-      list.appendChild(draggedItem);
+    if (draggedItem){
       draggedItem = null;
     }
   });
