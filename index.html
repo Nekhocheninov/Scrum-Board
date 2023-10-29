@@ -6,7 +6,7 @@
 </head>
 
 <body>
-    <div class = "scrumBoard">
+    <div draggable="false" class = "scrumBoard">
         <div class = "inputForm">
             <h1> Scrum Board </h1>
             <input type = "text" placeholder = "Title...">
@@ -15,11 +15,11 @@
             <div id = "backlog">
                 <h2> Backlog </h2>
                 <ul id = "list1" class = "list">
-                    <li style = 'display : none'><img src="img/trash.png" class="trash">
+                    <li draggable="true" style = 'display : none'><img src="img/trash.png" class="trash">
                         <img src="img/arrrow.png" class="img-right">
                         <img src="img/arrrow.png" class="img-left">
                     </li>
-                    <li><img src="img/trash.png" class="trash">Example 1
+                    <li draggable="true"><img src="img/trash.png" class="trash">Example 1
                         <img src="img/arrrow.png" class="img-right">
                         <img src="img/arrrow.png" class="img-left">
                     </li>
@@ -28,7 +28,7 @@
             <div id = "inProgress">
                 <h2> In progress </h2>
                 <ul id = "list2" class = "list">
-                    <li><img src="img/trash.png" class="trash">Example 2
+                    <li draggable="true"><img src="img/trash.png" class="trash">Example 2
                         <img src="img/arrrow.png" class="img-right">
                         <img src="img/arrrow.png" class="img-left">
                     </li>
@@ -37,7 +37,7 @@
             <div id = "done">
                 <h2 style="border-radius: 0px 25px 0px 0px;"> Done </h2>
                 <ul id = "list3" class = "list">
-                    <li><img src="img/trash.png" class="trash">Example 3
+                    <li draggable="true"><img src="img/trash.png" class="trash">Example 3
                         <img src="img/arrrow.png" class="img-right">
                         <img src="img/arrrow.png" class="img-left">
                     </li>
