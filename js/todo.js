@@ -2,43 +2,35 @@ var input = document.querySelector("input[type = 'text']");
 var imgs = document.getElementsByTagName("img");
 
 var lists = document.querySelectorAll(".list");
+var draggedItem = null;
 
-// Add drag and drop functionality
 lists.forEach(function (list){
-  list.addEventListener(`dragend`, function (event) {
-    event.target.classList.remove(`selected`);
+  list.addEventListener("dragend", function (event){
+    event.target.classList.remove("selected");
+    if (draggedItem) draggedItem = null;
   });
 
   list.addEventListener("dragover", function (event){
     event.preventDefault();
+    if (!draggedItem) return;
 
     const currentElement = event.target;
 
-    if (draggedItem !== currentElement && currentElement.tagName === 'LI'){
+    if (currentElement.tagName === "LI" && draggedItem !== currentElement){
       const nextElement = (currentElement === draggedItem.nextElementSibling) ?
                            currentElement.nextElementSibling : currentElement;
       list.insertBefore(draggedItem, nextElement);
-      return;
     }
-    else if (currentElement.tagName === 'UL' && list.childElementCount === 0 || list.childElementCount === 1){
+    else if (currentElement.tagName === "UL" && !currentElement.lastElementChild)
       list.appendChild(draggedItem);
-      return;
-    }
-  });
-
-  list.addEventListener("drop", function (event){
-    event.preventDefault();
-    if (draggedItem){
-      draggedItem = null;
-    }
+    else if (currentElement.tagName === "UL" && event.clientY > currentElement.lastElementChild.getBoundingClientRect().top)
+      list.appendChild(draggedItem);
   });
 });
 
-var draggedItem = null;
-
 document.addEventListener("dragstart", function (event){
-  if (event.target.classList.contains("list")) return;
-  event.target.classList.add(`selected`);
+  if (event.target.tagName !== "LI") return;
+  event.target.classList.add("selected");
   draggedItem = event.target;
 });
 
