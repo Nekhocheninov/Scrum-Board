@@ -4,8 +4,16 @@ var imgs = document.getElementsByTagName("img");
 var lists = document.querySelectorAll(".list");
 var draggedItem = null;
 
-lists.forEach(function (list){
+const getNextElement = (cursorPosition, currentElement) => {
+  const currentElementCoord = currentElement.getBoundingClientRect();
+  const currentElementCenter = currentElementCoord.y + currentElementCoord.height / 2;
+  const nextElement = (cursorPosition < currentElementCenter) ?
+      currentElement :
+      currentElement.nextElementSibling;
+  return nextElement;
+};
 
+lists.forEach(function (list){
   list.addEventListener("click", function (event){
     if (!(event.target.tagName === "LI")) return;
     event.target.classList.contains("closed") ? event.target.classList.remove("closed") : event.target.classList.add("closed");
@@ -23,8 +31,9 @@ lists.forEach(function (list){
     const currentElement = event.target;
 
     if (currentElement.tagName === "LI" && draggedItem !== currentElement){
-      const nextElement = (currentElement === draggedItem.nextElementSibling) ?
-                           currentElement.nextElementSibling : currentElement;
+      const activeElement = document.querySelector(`.selected`);
+      const nextElement = getNextElement(event.clientY, currentElement);
+      if (nextElement && activeElement === nextElement.previousElementSibling || activeElement === nextElement) return;
       list.insertBefore(draggedItem, nextElement);
     }
     else if (currentElement.tagName === "UL" && !currentElement.lastElementChild)
