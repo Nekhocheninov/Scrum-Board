@@ -5,6 +5,12 @@ var lists = document.querySelectorAll(".list");
 var draggedItem = null;
 
 lists.forEach(function (list){
+
+  list.addEventListener("click", function (event){
+    if (!(event.target.tagName === "LI")) return;
+    event.target.classList.contains("closed") ? event.target.classList.remove("closed") : event.target.classList.add("closed");
+  });
+
   list.addEventListener("dragend", function (event){
     event.target.classList.remove("selected");
     if (draggedItem) draggedItem = null;
@@ -72,7 +78,8 @@ input.addEventListener("keypress", function(keyPressed){
     const node = document.getElementById('list1');
     var clone = node.querySelector('li').cloneNode(true);
     clone.style = '';
-    node.appendChild(clone).append(newTodo);
+    clone.insertBefore(document.createTextNode(newTodo), clone.firstChild);
+    node.appendChild(clone);
     this.value = "" ;
     Todo();
   }
