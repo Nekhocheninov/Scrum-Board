@@ -16,6 +16,7 @@ const getNextElement = (cursorPosition, currentElement) => {
 lists.forEach(function (list){
   list.addEventListener("click", function (event){
     if (!(event.target.tagName === "LI")) return;
+    event.target.classList.remove("editmode")
     event.target.classList.contains("closed") ? event.target.classList.remove("closed") : event.target.classList.add("closed");
   });
 
@@ -70,6 +71,28 @@ function Todo(){
         var node = img.parentNode;
         if (node.parentNode.id == "list3") addScrum('list2', node);
         else addScrum('list1', node);
+        event.stopImmediatePropagation();
+      });
+    }
+    if (img.className == "edit"){
+      img.addEventListener ("click", function (){
+        var span= img.parentElement.getElementsByTagName("span")[0];
+        if (span.getAttribute("contenteditable") === "false"){
+          span.setAttribute("contenteditable", "true");
+          const range = document.createRange();
+          range.selectNodeContents(span);
+          range.collapse(false);
+
+          const selection = window.getSelection();
+          selection.removeAllRanges();
+          selection.addRange(range);
+          img.parentElement.classList.add("editmode");
+          img.parentElement.classList.remove("closed");
+        }
+        else{
+          span.setAttribute("contenteditable", "false");
+          img.parentElement.classList.remove("editmode");
+        }
         event.stopImmediatePropagation();
       });
     }
