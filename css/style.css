@@ -47,7 +47,9 @@ input:focus {
     margin-left: -38px;
     transition: opacity 0.6s linear;
 }
-
+.trash {
+    margin-top: -8px;
+}
 .edit {
     width: 24px;
     margin-top: 0;
@@ -126,12 +128,27 @@ input:focus {
     background: #edf1f5;
 }
 
+#list1 .editmode{
+    background: #edf1f5;
+    background: linear-gradient(to bottom, #edf1f5, #edf1f5, #b87434b5);
+}
+
 #list2 li {
     background: #fff3d3;
 }
 
+#list2 .editmode{
+    background: #fff3d3;
+    background: linear-gradient(to bottom, #fff3d3, #fff3d3, #b87434b5);
+}
+
 #list3 li {
     background: #dfffd7;
+}
+
+#list3 .editmode{
+    background: #dfffd7;
+    background: linear-gradient(to bottom, #dfffd7, #dfffd7, #b87434b5);
 }
 
 #backlog, #inProgress, #done {
@@ -154,6 +171,9 @@ input:focus {
 li span {
     font-size: 16px;
     word-wrap: break-word;
+    display: block;
+    width: 100%;
+    min-height: 25px;
 }
 
 .list li {
@@ -173,4 +193,9 @@ hr {
     margin-top: 10px;
     margin-left: -38px;
     margin-right: -20px;
-  }
+}
+
+[contenteditable]:focus {
+    outline: none;
+}
+
