@@ -39,13 +39,19 @@ input:focus {
     color: #083da1;
 }
 
-.trash, .img-right, .img-left {
+.trash, .img-right, .img-left, .edit {
     width: 34px;
     float: left;
     margin: -5px 0 0 0;
     opacity: 0;
     margin-left: -38px;
     transition: opacity 0.6s linear;
+}
+
+.edit {
+    width: 24px;
+    margin-top: -2px;
+    margin-left: -32px;
 }
 
 .img-right, .img-left {
