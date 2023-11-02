@@ -77,7 +77,7 @@ function Todo(){
     if (img.className == "edit"){
       img.addEventListener ("click", function (){
         var span= img.parentElement.getElementsByTagName("span")[0];
-        if (span.getAttribute("contenteditable") === "false"){
+        if (span.getAttribute("contenteditable") === "false" || !span.hasAttribute("contenteditable")){
           span.setAttribute("contenteditable", "true");
           const range = document.createRange();
           range.selectNodeContents(span);
