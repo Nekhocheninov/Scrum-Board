@@ -177,6 +177,7 @@ li span {
 }
 
 .list li {
+    position: relative;
     max-height: 500px;
     transition: max-height 0.3s ease-in-out;
     overflow: hidden;
@@ -193,6 +194,14 @@ hr {
     margin-top: 10px;
     margin-left: -38px;
     margin-right: -20px;
+}
+
+.DataTime {
+    color: rgba(63, 63, 63, 0.666);
+    position: absolute;
+    bottom: -10;
+    left: 220;
+    font-size: 12px;
 }
 
 [contenteditable]:focus {
