@@ -111,6 +111,9 @@ input.addEventListener("keypress", function(keyPressed){
     var clone = node.querySelector('li').cloneNode(true);
     clone.style = '';
     clone.insertBefore(document.createTextNode(newTodo), clone.firstChild);
+    var span = clone.querySelector('.DataTime');
+    var currentDate = new Date();
+    span.appendChild(document.createTextNode(currentDate.toLocaleString('ru-RU')));
     node.appendChild(clone);
     this.value = "" ;
     Todo();
