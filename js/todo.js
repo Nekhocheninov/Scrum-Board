@@ -17,6 +17,7 @@ lists.forEach(function (list){
   list.addEventListener("click", function (event){
     if (!(event.target.tagName === "LI")) return;
     event.target.classList.remove("editmode")
+    event.target.getElementsByTagName("span")[0].setAttribute("contenteditable", "false");
     event.target.classList.contains("closed") ? event.target.classList.remove("closed") : event.target.classList.add("closed");
   });
 
@@ -111,9 +112,8 @@ input.addEventListener("keypress", function(keyPressed){
     var clone = node.querySelector('li').cloneNode(true);
     clone.style = '';
     clone.insertBefore(document.createTextNode(newTodo), clone.firstChild);
-    var span = clone.querySelector('.DataTime');
     var currentDate = new Date();
-    span.appendChild(document.createTextNode(currentDate.toLocaleString('ru-RU')));
+    clone.querySelector('.DataTime').appendChild(document.createTextNode(currentDate.toLocaleString('ru-RU')));
     node.appendChild(clone);
     this.value = "" ;
     Todo();
