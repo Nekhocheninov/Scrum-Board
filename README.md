@@ -20,6 +20,7 @@
    - *Сlick the Edit icon* again or *close the details view* to save the changes.
 4. Moving Tasks;
    - To move a task between columns, *drag and drop* the task card to the desired column or *click the arrow icon* on the task card.
+   - To change the order of tasks in a column, *drag and drop* the task to the desired location.
 5. Deleting Tasks.
    - To delete a task, *open the task details view*.
    - *Click the trash can icon*.
