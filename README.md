@@ -7,10 +7,10 @@
 ### Overview of Main Features
 
 1. Creating Tasks;
-   - To create a new task, go to the **"Scrum Board"** header.
-   - *Click the area* labeled **"Title..."**.
+   - To create a new task, go to the *"Scrum Board"* header.
+   - *Click the area* labeled *"Title..."*.
    - Enter a name for the task.
-   - *Press* **"Enter"** on your keyboard to add the task to the board in the **"Backlog"** column.
+   - *Press* *"Enter"* on your keyboard to add the task to the board in the *"Backlog"* column.
 2. Opening/Closing Task Details;
    - *Click on a task card* to open the details view.
    - *Click on a task card* again to close the details view.
