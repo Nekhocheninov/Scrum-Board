@@ -11,6 +11,9 @@
    - Click the area labeled **"Title..."**.
    - Enter a name for the task.
    - Press **"Enter"** on your keyboard to add the task to the board in the **"Backlog"** column.
-
+2. Editing Task Details;
+3. Deleting Tasks;
+4. Moving Tasks;
+5. Deleting Tasks.
 
 Happy Task Management! 🚀
