@@ -15,51 +15,29 @@
             <div id = "backlog">
                 <h2> Backlog </h2>
                 <ul id = "list1" class = "list">
-                    <li draggable="true" style='display : none' class="closed"><img src="img/edit.png" class="edit">
+                    <li draggable="true" id = "none" style='display : none' class="closed"><img src="img/edit.png" class="edit">
                         <img src="img/arrrow.png" class="img-right">
                         <img src="img/arrrow.png" class="img-left">
                         <hr>
                         <img src="img/trash.png" class="trash">
-                        <span> Description </span>
+                        <span class="Description"></span>
                         <span class="DateTime"></span>
-                    </li>
-                    <li draggable="true" class="z"><img src="img/edit.png" class="edit">Example 1
-                        <img src="img/arrrow.png" class="img-right">
-                        <img src="img/arrrow.png" class="img-left">
-                        <hr>
-                        <img src="img/trash.png" class="trash">
-                        <span> Description </span>
-                        <span class="DateTime">08.11.2023, 22:39:16</span>
                     </li>
                 </ul>
             </div>
             <div id = "inProgress">
                 <h2> In progress </h2>
                 <ul id = "list2" class = "list">
-                    <li draggable="true"><img src="img/edit.png" class="edit">Example 2
-                        <img src="img/arrrow.png" class="img-right">
-                        <img src="img/arrrow.png" class="img-left">
-                        <hr>
-                        <img src="img/trash.png" class="trash">
-                        <span> Description </span>
-                        <span class="DateTime">08.11.2023, 22:39:25</span>
-                    </li>
                 </ul>
             </div>
             <div id = "done">
                 <h2 style="border-radius: 0px 25px 0px 0px;"> Done </h2>
                 <ul id = "list3" class = "list">
-                    <li draggable="true" class="closed"><img src="img/edit.png" class="edit">Example 3
-                        <img src="img/arrrow.png" class="img-right">
-                        <img src="img/arrrow.png" class="img-left">
-                        <hr>
-                        <img src="img/trash.png" class="trash">
-                        <span> Description </span>
-                        <span class="DateTime">08.11.2023, 22:39:29</span>
-                    </li>
                 </ul>
             </div>
         </div>
     </div>
-    <script src="js/todo.js"></script>
+    <script src="js/database.js"      ></script>
+    <script src="js/databaseUtils.js" ></script>
+    <script src="js/taskManager.js"   ></script>
 </body>
