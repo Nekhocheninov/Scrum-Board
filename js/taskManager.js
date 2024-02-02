@@ -1,6 +1,6 @@
 var input = document.querySelector("input[type = 'text']");
-var draggedItem = null;
-var originalList = null;
+var draggedItem = null;  // draggable element.
+var originalList = null; // initial list of dragged element.
 
 /*
     Updates the list of tasks on the page.
@@ -15,10 +15,12 @@ function UpdateList(list) {
             var clone = document.getElementById("list1").querySelector("li").cloneNode(true);
             clone.id = task.id
             clone.style = '';
+            if (task.state) clone.classList.toggle("closed");
             clone.querySelector(".DateTime").appendChild(document.createTextNode(task.datetime));
             clone.querySelector(".Description").appendChild(document.createTextNode(task.description));
             clone.insertBefore(document.createTextNode(task.title), clone.firstChild);
             node.appendChild(clone);
+            console.log(task.position, ' - ', task.id);
         })
         addEventListenersToImages();
         addEventListenersToLists();
@@ -39,7 +41,8 @@ input.addEventListener("keypress", function(keyPressed) {
             description: "Description",
             datetime:    currentDate.toLocaleString("ru-RU"),
             list:        "list1",
-            position:    numberOfItems
+            position:    numberOfItems,
+            state: 0
         };
         addTask(newTask);
         this.value = "" ;
@@ -58,18 +61,22 @@ function addEventListenersToImages() {
     }
     imgs = document.querySelectorAll("img.edit");
     for (let img of imgs) {
-        img.removeEventListener("click", TrashClickHandler);
-        img.addEventListener("click", TrashClickHandler);
+        img.removeEventListener("click", EditClickHandler);
+        img.addEventListener("click", EditClickHandler);
     }
     imgs = document.querySelectorAll("img.img-right");
     for (let img of imgs) {
-        img.removeEventListener("click", TrashClickHandler);
-        img.addEventListener("click", TrashClickHandler);
+        img.removeEventListener("click", LeftRightClickHandler);
+        img.addEventListener("click", function(event) {
+            LeftRightClickHandler(event, 0);
+        });
     }
     imgs = document.querySelectorAll("img.img-left");
     for (let img of imgs) {
-        img.removeEventListener("click", TrashClickHandler);
-        img.addEventListener("click", TrashClickHandler);
+        img.removeEventListener("click", LeftRightClickHandler);
+        img.addEventListener("click", function(event) {
+            LeftRightClickHandler(event, 1);
+        });
     }
 }
 
@@ -107,10 +114,22 @@ function changePositions(items, start, end, num = -1) {
 }
 
 /*
-
+    Click event handler to enable/disable task editing mode.
+    @param {Event} event - Click event.
 */
-function handleEditClick(event) {
-    if (!span || span.getAttribute("contenteditable") === "false" || !span.hasAttribute("contenteditable")) {
+function EditClickHandler(event) {
+    const parent = event.target.parentNode;
+    const span = parent.querySelector("span");
+
+    parent.classList.toggle("editmode");
+
+    if (!span || span.getAttribute("contenteditable") === "true"){
+        span.setAttribute("contenteditable", "false");
+        getTask(parseInt(parent.id), function(task) {
+            task.description = span.textContent.trim();
+            updateTask(task);
+        });
+    } else {
         span.setAttribute("contenteditable", "true");
         const range = document.createRange();
         range.selectNodeContents(span);
@@ -119,13 +138,31 @@ function handleEditClick(event) {
         const selection = window.getSelection();
         selection.removeAllRanges();
         selection.addRange(range);
-    
-        parent.classList.add("editmode");
+
         parent.classList.remove("closed");
-    } else {
-        span.setAttribute("contenteditable", "false");
-        parent.classList.remove("editmode");
     }
+}
+
+/*
+    A click handler for the left and right buttons to move a task between lists.
+    @param {Event} event - Button click event.
+    @param {boolean} isLeft - A flag indicating whether the left button was pressed.
+*/
+function LeftRightClickHandler(event, isLeft) {
+    const node = event.target.parentNode;
+    getTask(parseInt(node.id), function(task) {
+        const otherlist = document.getElementById(task.list);
+        task.list = (task.list === "list2") ? (isLeft ? "list1" : "list3") : "list2";
+        const list = document.getElementById(task.list);
+        const otheritems = otherlist.querySelectorAll('li:not(#none)');
+        for (let i = task.position + 1; i < otheritems.length; i++) {
+            changePositions(otheritems, i, otheritems.length);
+        }
+        task.position = list.querySelectorAll('li:not(#none)').length;
+        updateTask(task);
+        UpdateList(otherlist.id);
+        UpdateList(list.id);
+    });
 }
 
 /*
@@ -170,51 +207,57 @@ function listClickHandler(event) {
     target.classList.remove("editmode");
     target.getElementsByTagName("span")[0].setAttribute("contenteditable", "false");
     target.classList.toggle("closed");
+    if (!target.classList.contains("closed")) {
+        getTask(parseInt(event.target.id), function(task) {
+            task.state = 1;
+            updateTask(task);
+        });
+    }
 }
 
 /*
-
+    Event handler for "dragend".
+    Removes the "selected" class from the element that completes the drag.
+    If an item is dragged back to the original list, updates the task positions in the list.
+    If an item is dragged to another list, updates the task positions in both lists.
+    @param {Event} event - The "dragend" event.
 */
 function listdragendHandler(event) {
     event.target.classList.remove("selected");
-    if (draggedItem) {
-        if ((event.target.parentNode.id) == (originalList.id)){
-            getTask(parseInt(event.target.id), function(task) {
-                const items = event.target.closest('ul').querySelectorAll('li:not(#none)');
-                for (let i = 0; i < items.length; i++) {
-                    if (items[i].id == event.target.id) {
-                        if (task.position < i) {
-                            changePositions(items, task.position, i);
-                        } else {
-                            changePositions(items, i + 1, task.position + 1, 1);
-                        }
-                        task.position = i;
-                        updateTask(task);
-                        break;
-                    }
+    if (!draggedItem) return
+
+    const items = event.target.closest('ul').querySelectorAll('li:not(#none)');
+    const isSameList = event.target.parentNode.id === originalList.id;
+
+    getTask(parseInt(event.target.id), function(task) {
+        for (let i = 0; i < items.length; i++) {
+            if (items[i].id == event.target.id) {
+                if (!isSameList) {
+                    changePositions(items, i + 1, items.length, 1);
+                    task.list = event.target.closest('ul').id;
+                } else if(task.position < i) {
+                    changePositions(items, task.position, i);
+                } else {
+                    changePositions(items, i + 1, task.position + 1, 1);
                 }
-            });
-        } else {
-            const items2 = originalList.querySelectorAll('li:not(#none)');
-            getTask(parseInt(event.target.id), function(task) {
-                for (let i = task.position; i < items2.length; i ++) {
-                    changePositions(items2, i, items2.length);
-                }
-                const items = event.target.closest('ul').querySelectorAll('li:not(#none)');
-                for (let i = 0; i < items.length; i++) {
-                    if (items[i].id == event.target.id) {
-                        changePositions(items, i + 1, items.length, 1);
-                        task.position = i;
-                        task.list = event.target.closest('ul').id;
-                        updateTask(task);
-                        break;
-                    }
-                }
-            });
+                task.position = i;
+                updateTask(task);
+                break;
+            }
         }
-        draggedItem = null;
-        originalList = null;
+    });
+
+    if (!isSameList) {
+        const otheritems = originalList.querySelectorAll('li:not(#none)');
+        getTask(parseInt(event.target.id), function(task) {
+            for (let i = task.position; i < otheritems.length; i++) {
+                changePositions(otheritems, i, otheritems.length);
+            }
+        });
     }
+    
+    draggedItem = null;
+    originalList = null;
 }
 
 /*
@@ -259,3 +302,4 @@ function getNextElement (cursorPosition, currentElement) {
 UpdateList("list1");
 UpdateList("list2");
 UpdateList("list3");
+
