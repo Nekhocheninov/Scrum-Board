@@ -207,12 +207,13 @@ function listClickHandler(event) {
     target.classList.remove("editmode");
     target.getElementsByTagName("span")[0].setAttribute("contenteditable", "false");
     target.classList.toggle("closed");
-    if (!target.classList.contains("closed")) {
-        getTask(parseInt(event.target.id), function(task) {
+    getTask(parseInt(event.target.id), function(task) {
+        task.state = 0;
+        if (!target.classList.contains("closed")) {
             task.state = 1;
-            updateTask(task);
-        });
-    }
+        }
+        updateTask(task);
+    });
 }
 
 /*
