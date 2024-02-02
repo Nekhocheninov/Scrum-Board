@@ -9,6 +9,8 @@
     git clone https://github.com/Nekhocheninov/Scrum-Board.git
     ```
 
+2. Open index.html.
+
 ## Usage
 
 ### Overview of Main Features
