@@ -1,5 +1,6 @@
 # Scrum Board
 [![License](https://img.shields.io/badge/License-Apache_2.0-blue.svg)](https://github.com/Nekhocheninov/ScrumBoard/blob/main/LICENSE.md)
+[![Website](https://img.shields.io/badge/Visit-Website-blue)](https://nekhocheninov.github.io/Scrum-Board/)
 ![GitHub last commit](https://img.shields.io/github/last-commit/Nekhocheninov/ScrumBoard)
 
 ## How To Start
@@ -10,6 +11,9 @@
     ```
 
 2. Open index.html.
+
+[Or click here go to the website.](https://nekhocheninov.github.io/Scrum-Board/)
+
 
 ## Usage
 
