@@ -1,6 +1,19 @@
 # Scrum Board
 [![License](https://img.shields.io/badge/License-Apache_2.0-blue.svg)](https://github.com/Nekhocheninov/ScrumBoard/blob/main/LICENSE.md)
+[![Website](https://img.shields.io/badge/Visit-Website-blue)](https://nekhocheninov.github.io/Scrum-Board/)
 ![GitHub last commit](https://img.shields.io/github/last-commit/Nekhocheninov/ScrumBoard)
+
+## How To Start
+
+1. Clone the repo:
+    ```
+    git clone https://github.com/Nekhocheninov/Scrum-Board.git
+    ```
+
+2. Open index.html.
+
+[Or click here go to the website.](https://nekhocheninov.github.io/Scrum-Board/)
+
 
 ## Usage
 
@@ -26,3 +39,7 @@
    - *Click the trash can icon*.
 
 Happy Task Management! 🚀
+
+## Sample
+
+<img src="https://github.com/Nekhocheninov/Scrum-Board/blob/without-database/Sample.gif" >
