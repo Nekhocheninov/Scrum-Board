@@ -203,16 +203,22 @@ function addEventListenersToLists() {
 */
 function listClickHandler(event) {
     if (!(event.target.tagName === "LI")) return;
-    var target = event.target;
-    target.classList.remove("editmode");
-    target.getElementsByTagName("span")[0].setAttribute("contenteditable", "false");
+    const target = event.target;
+    const span = target.querySelector("span");
+    
+    span.setAttribute("contenteditable", "false");
     target.classList.toggle("closed");
+
     getTask(parseInt(event.target.id), function(task) {
         task.state = 0;
         if (!target.classList.contains("closed")) {
             task.state = 1;
         }
+        if (target.classList.contains("editmode")){
+            task.description = span.textContent.trim();
+        }
         updateTask(task);
+        target.classList.remove("editmode");
     });
 }
 

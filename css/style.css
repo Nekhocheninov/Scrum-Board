@@ -171,6 +171,7 @@ input:focus {
 li span {
     font-size: 16px;
     word-wrap: break-word;
+    white-space: pre-wrap;
     display: block;
     width: 100%;
     min-height: 25px;
