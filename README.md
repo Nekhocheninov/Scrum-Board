@@ -12,7 +12,7 @@
 
 2. Open index.html.
 
-[Or click here go to the website.](https://nekhocheninov.github.io/Scrum-Board/)
+[Or click here to go to the website.](https://nekhocheninov.github.io/Scrum-Board/)
 
 
 ## Usage
